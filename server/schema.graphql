@@ -1,0 +1,17 @@
+type Query {
+	job(id: ID!): job
+	jobs: [job]
+}
+
+type job {
+	id: ID!
+	title: String
+	company: Company
+	description: String
+}
+
+type Company {
+	id: ID!
+	name: String
+	desciprion: String
+}
