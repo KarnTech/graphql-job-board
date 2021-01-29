@@ -7,6 +7,23 @@ import { JobBoard } from './JobBoard';
 import { JobDetail } from './JobDetail';
 import { JobForm } from './JobForm';
 import { NavBar } from './NavBar';
+import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
+
+
+const client = new ApolloClient({
+  uri: 'http://localhost:9000/graphql',
+  cache: new InMemoryCache()
+});
+
+const getjobs  =  gql`
+{
+    jobs {
+      id
+    }
+  }
+`
 
 export class App extends Component {
   constructor(props) {
@@ -28,7 +45,8 @@ export class App extends Component {
   render() {
     const {loggedIn} = this.state;
     return (
-      <Router ref={(router) => this.router = router}>
+      <ApolloProvider client= {client} >
+             <Router ref={(router) => this.router = router}>
         <div>
           <NavBar loggedIn={loggedIn} onLogout={this.handleLogout.bind(this)} />
           <section className="section">
@@ -44,6 +62,10 @@ export class App extends Component {
           </section>
         </div>
       </Router>
+
+        
+      </ApolloProvider>
+     
     );
   }
 }

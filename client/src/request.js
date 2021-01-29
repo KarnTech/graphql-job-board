@@ -7,6 +7,7 @@ export async function loadJobs(){
             query:`{
                 jobs {
                 id
+                title
                 description
                 company{
                 id
@@ -16,7 +17,6 @@ export async function loadJobs(){
         }` })});
 
     const resposneBody  = await res.json()
-    console.log(resposneBody.data)
     return resposneBody.data
 }
 

@@ -7,3 +7,5 @@ module.exports = {
   jobs: store.collection('jobs'),
   users: store.collection('users')
 };
+
+
